@@ -44,91 +44,73 @@ Transfert du fichier dans HDFS:<br/>
 ```
 hdfs dfs -put breweries.csv /data/openbeer/breweries/breweries.csv
 ```
-
-
-
-
-
-Cette image permet de deployer :
-* Une Infrastructure Apache Hadoop avec son système de fichier
-* Une base de données Mysql ainsi que les données associées
-
-## Import
+## Quick Start Hive
 ***
-Exemple d'exportation de la base de données Mysql vers HDFS de Hadoop
+Démmarrer le serveur Hive
 ```
-Exportation du fichier vers hdfs
-sqoop import 
-    --connect jdbc:mysql://localhost/employees 
-    --table employees 
-    --username bda 
-    --password 123456
-```
-## Import avec création de Base de données
-***
-Exemple d'exportation de la base de données Mysql vers HDFS de Hadoop
-```
-#Creation des données dans la base
-CREATE DATABASE IF NOT EXISTS test;
+ docker exec -it hive-server bash
 
-GRANT CREATE, ALTER, INDEX, LOCK TABLES, REFERENCES, UPDATE, DELETE, DROP, SELECT, INSERT ON `test`.* TO 'bda'@'localhost';
-FLUSH PRIVILEGES;
+  hiveserver2
+```
+Utiliser les lignes de commande pour vous connecter au serveur<br>
+```
+beeline -u jdbc:hive2://localhost:10000 -n root
+```
+Voir la base de données
+```
+show databases;
++----------------+
+| database_name  |
++----------------+
+| default        |
++----------------+
+1 row selected (0.335 seconds)
+```
+Créer une base de données
+```
+create database openbeer;
+  use openbeer;
+```
+Créer la Table associé qui va permettre de définir le modéle de données
+```
+CREATE EXTERNAL TABLE IF NOT EXISTS breweries(
+    NUM INT,
+    NAME CHAR(100),
+    CITY CHAR(100),
+    STATE CHAR(100),
+    ID INT )
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY ','
+STORED AS TEXTFILE
+location '/data/openbeer/breweries';
+```
+Nous pouvons maintenant faire la Requête suivante
 
-CREATE TABLE client (
- id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-  nom VARCHAR(100),
-  email VARCHAR(100)
-);
-INSERT INTO `client` (`nom`, `email`) VALUES ('Paul', 'paul@example.com');
-INSERT INTO `client` (`nom`, `email`) VALUES ('Sandra', 'sandra@example.com');
 ```
-importation vers hdfs
+select name from breweries limit 10;
++----------------------------------------------------+
+|                        name                        |
++----------------------------------------------------+
+| name                                               |
+| NorthGate Brewing                                  |
+| Against the Grain Brewery                          |
+| Jack's Abby Craft Lagers                           |
+| Mike Hess Brewing Company                          |
+| Fort Point Beer Company                            |
+| COAST Brewing Company                              |
+| Great Divide Brewing Company                       |
+| Tapistry Brewing                                   |
+| Big Lake Brewing                                   |
++----------------------------------------------------+
+10 rows selected (0.113 seconds
 ```
-sqoop import --connect jdbc:mysql://localhost/test
-	     --table client
-	     --username bda
-              --password 123456
-```
-Test de présence du fichier dans HDFS
-```
-hadoop fs -ls /user/root/client
-```
-Afficher les données
-```
-hadoop fs -cat /user/root/client/part-m-00000
-1,Paul,paul@example.com
-hadoop fs -cat /user/root/client/part-m-00001
-2,Sandra,sandra@example.com
-```
-## Exemple d'Export
+
+
+## Application Spring-Boot
 ***
-**Exportation d un fichier directement dans une base de données**
-Copier le fichier sur le pod
+Vous trouverez ici le code source d'une application Spring-Boot permettant d'éffectuer des requête sur Apache Hive
 ```
-docker cp people.txt agitated_goldstine:people.txt
+mvn clean
+mvn spring-boot:run
 ```
-Créer un dossier dans hdfs
-```
-hdfs dfs -mkdir -p /fichier
-```
-Pousser le fichier dans le cluster Hdfs
-```
-hdfs dfs -put people.txt /fichier/people.txt
-```
-Dans mysql créer la base de données ainsi que la table associé
-```
-CREATE DATABASE IF NOT EXISTS people;
-GRANT CREATE, ALTER, INDEX, LOCK TABLES, REFERENCES, UPDATE, DELETE, DROP, SELECT, INSERT ON `people`.* TO 'bda'@'localhost';
-CREATE TABLE people (
-  prenom VARCHAR(100),
-  age VARCHAR(100)
-);
-```
-Faire un export du foicher vers la base de données
-```
-sqoop export --connect jdbc:mysql://localhost/people
-	     --username bda
-             --password 123456
-             --table people
-             --export-dir /fichier/people.txt
-```
+
