@@ -7,7 +7,7 @@
 ***
 Apache HIVE fait partie de l'écosytème BigData HADOOP.<br/>
 Le sytème Apache HIVE permet de pouvoir effectuer directement des requete de type SQL.<br/>
-Il offre une altérnative au Logiciel Sqoop.<br/>
+Il offre une altérnative au Logiciel Sqoop.<br/><br/>
 Vous trouverez ici une solution compléte vous permettant de déployer un système HADOOP via docker.<br/>
 Ainsi qu'un applicatif SpringBoot permettant de faire des requête Apache Hive
 
@@ -17,16 +17,15 @@ Déploiement du cluster Hadoop-Spark-Hive:<br/>
 ```
 docker-compose up
 ```
-`* Puce`
 Pour accèder aux interfaces des différents composants:<br>
 * Namenode: http://<dockerhadoop_IP_address>:9870/dfshealth.html#tab-overview
 * History server: http://<dockerhadoop_IP_address>:8188/applicationhistory
-*Datanode: http://<dockerhadoop_IP_address>:9864/
-*Nodemanager: http://<dockerhadoop_IP_address>:8042/node
-*Resource manager: http://<dockerhadoop_IP_address>:8088/
-*Spark master: http://<dockerhadoop_IP_address>:8080/
-*Spark worker: http://<dockerhadoop_IP_address>:8081/
-*Hive: http://<dockerhadoop_IP_address>:10000
+* Datanode: http://<dockerhadoop_IP_address>:9864/
+* Nodemanager: http://<dockerhadoop_IP_address>:8042/node
+* Resource manager: http://<dockerhadoop_IP_address>:8088/
+* Spark master: http://<dockerhadoop_IP_address>:8080/
+* Spark worker: http://<dockerhadoop_IP_address>:8081/
+* Hive: http://<dockerhadoop_IP_address>:10000
 
 
 
