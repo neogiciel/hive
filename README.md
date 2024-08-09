@@ -27,17 +27,28 @@ Pour accèder aux interfaces des différents composants:<br>
 * Spark worker: http://<dockerhadoop_IP_address>:8081/
 * Hive: http://<dockerhadoop_IP_address>:10000
 
-
-
-
-
-
-
-
-Run Image Docker:<br/>
+## Transfert du Fichier dans le cluster HDFS
+Copie du fichier dans le pod:<br/>
 ```
-docker run -it ghcr.io/kasipavankumar/sqoop-docker:latest
+docker cp breweries.csv namenode:breweries.csv
 ```
+Accès au shell du pod:<br/>
+```
+docker exec -it namenode bash
+```
+Création du dossier dans HDFS:<br/>
+```
+hdfs dfs -mkdir -p /data/openbeer/breweries
+```
+Transfert du fichier dans HDFS:<br/>
+```
+hdfs dfs -put breweries.csv /data/openbeer/breweries/breweries.csv
+```
+
+
+
+
+
 Cette image permet de deployer :
 * Une Infrastructure Apache Hadoop avec son système de fichier
 * Une base de données Mysql ainsi que les données associées
