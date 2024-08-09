@@ -108,7 +108,7 @@ select name from breweries limit 10;
 
 ## Application Spring-Boot
 ***
-Vous trouverez ici le code source d'une application Spring-Boot permettant d'éffectuer des requête sur Apache Hive
+Vous trouverez ici le code source d'une application Spring-Boot permettant d'éffectuer des requêtes sur Apache Hive
 ```
 mvn clean
 mvn spring-boot:run
