@@ -17,6 +17,7 @@ Déploiement du cluster Hadoop-Spark-Hive:<br/>
 ```
 docker-compose up
 ```
+`* Puce`
 Pour accèder aux interfaces des différents composants:<br>
 *Namenode: http://<dockerhadoop_IP_address>:9870/dfshealth.html#tab-overview
 *History server: http://<dockerhadoop_IP_address>:8188/applicationhistory
