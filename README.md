@@ -19,8 +19,8 @@ docker-compose up
 ```
 `* Puce`
 Pour accèder aux interfaces des différents composants:<br>
-*Namenode: http://<dockerhadoop_IP_address>:9870/dfshealth.html#tab-overview
-*History server: http://<dockerhadoop_IP_address>:8188/applicationhistory
+* Namenode: http://<dockerhadoop_IP_address>:9870/dfshealth.html#tab-overview
+* History server: http://<dockerhadoop_IP_address>:8188/applicationhistory
 *Datanode: http://<dockerhadoop_IP_address>:9864/
 *Nodemanager: http://<dockerhadoop_IP_address>:8042/node
 *Resource manager: http://<dockerhadoop_IP_address>:8088/
