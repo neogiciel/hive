@@ -1,0 +1,12 @@
+https://github.com/Marcel-Jan/docker-hadoop-spark
+
+docker-compose up
+
+docker cp breweries.csv namenode:breweries.csv
+
+docker exec -it namenode bash
+
+hdfs dfs -mkdir -p /data/openbeer/breweries
+
+hdfs dfs -put breweries.csv /data/openbeer/breweries/breweries.csv
+
