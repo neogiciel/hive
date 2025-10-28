@@ -1,10 +1,10 @@
-﻿## <h1>Hadoop : Apache Hive</h1>
+ ## <h1>Hadoop : Apache Hive</h1>
 ***
 <table><tr>
   <td><img src="https://github.com/user-attachments/assets/d4bcd836-0a1f-48e7-b971-3c7afdc02335" alt="drawing" height="240px"/></td>
 </tr></table>
-## Informations Générales
 ***
+## Informations Générales
 Apache HIVE fait partie de l'écosytème BigData HADOOP.<br/>
 Le sytème Apache HIVE permet de pouvoir effectuer directement des requete de type SQL.<br/>
 Il offre une altérnative au Logiciel Sqoop.<br/><br/>
